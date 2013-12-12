@@ -36,8 +36,8 @@ public class WorkingHoursPage extends BasePage {
 
 		Project lastProject = null;
 		List<UnitOfWork> stuff = projectManager.getUOWsByUserOrderedByProject(getSession().getCurrentUser());
-		// project szerint rendezve, tehát külön tudjuk válogatni:
 
+		// project szerint rendezve, tehát külön tudjuk válogatni:
 		for (UnitOfWork uow : stuff) {
 			if (lastProject != uow.getProject()) {
 				// új csomaghoz érkeztünk:
@@ -47,6 +47,23 @@ public class WorkingHoursPage extends BasePage {
 			}
 
 			works.getLast().addUnitOfWork(uow);
+		}
+
+		// megnézzük, hogy kimaradt-e olyan projekt, amihez nincs még log, de résztvevők vagyunk ezért logolhatunk rá
+		List<Project> projects = projectManager.getProjectsByParticipantId(getSession().getCurrentUser().getId());
+		for (Project project : projects) {
+			boolean found = false;
+			for (ProjectWork pw : works) {
+				if (pw.getProject().equals(project)) {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				// ez a projekt nem szerepel a listában, mert nincs hozzá log, ezért szúrjuk be.
+				ProjectWork pw = new ProjectWork(project);
+				works.add(pw);
+			}
 		}
 
 		add(new ListView<ProjectWork>("projects", works) {

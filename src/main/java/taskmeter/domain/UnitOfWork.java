@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "unit_of_works")
 @NamedQueries({
-		@NamedQuery(name = UnitOfWork.FIND_BY_USER_ORDER_BY_PROJECT, query = "SELECT u FROM UnitOfWork u WHERE u.user.id = :userId ORDER BY u.project.id, u.fromDate, u.toDate"),
+		@NamedQuery(name = UnitOfWork.FIND_BY_USER_ORDER_BY_PROJECT, query = "SELECT u FROM UnitOfWork u WHERE u.user.id = :userId and u.project MEMBER OF u.user.projectsAsParticipants ORDER BY u.project.id, u.fromDate, u.toDate"),
 		@NamedQuery(name = UnitOfWork.FIND_BY_PROJECT, query = "SELECT u FROM UnitOfWork u WHERE u.project.id = :projectId ORDER BY u.fromDate, u.toDate") })
 public class UnitOfWork implements Serializable {
 	private static final long serialVersionUID = 1L;
