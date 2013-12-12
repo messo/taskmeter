@@ -5,12 +5,16 @@ import java.util.List;
 
 import javax.ejb.EJB;
 
+import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.PropertyModel;
 
 import taskmeter.domain.Project;
 import taskmeter.domain.UnitOfWork;
@@ -47,10 +51,33 @@ public class WorkingHoursPage extends BasePage {
 
 		add(new ListView<ProjectWork>("projects", works) {
 
+			private UnitOfWork unitOfWork = new UnitOfWork();
+
 			@Override
 			protected void populateItem(ListItem<ProjectWork> item) {
-				ProjectWork pw = item.getModelObject();
+				final ProjectWork pw = item.getModelObject();
 				item.add(new Label("project", pw.getProject().getName()));
+
+				Form<UnitOfWork> form = new Form<UnitOfWork>("form", new CompoundPropertyModel<>(
+						new PropertyModel<UnitOfWork>(this, "unitOfWork"))) {
+
+					@Override
+					protected void onSubmit() {
+						unitOfWork.setUser(WorkingHoursPage.this.getSession().getCurrentUser());
+						unitOfWork.setProject(pw.getProject());
+						projectManager.createNewUnitOfWork(unitOfWork);
+
+						unitOfWork = new UnitOfWork();
+
+						throw new RestartResponseException(WorkingHoursPage.class);
+					}
+				};
+				item.add(form);
+
+				form.add(new TextField<>("fromDate"));
+				form.add(new TextField<>("toDate"));
+				form.add(new TextField<>("description"));
+
 				item.add(new ListView<UnitOfWork>("units", pw.getUnits()) {
 
 					@Override

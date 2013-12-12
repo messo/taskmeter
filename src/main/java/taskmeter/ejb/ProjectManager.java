@@ -88,4 +88,8 @@ public class ProjectManager extends AbstractManager<Project> {
 
 		return magic;
 	}
+
+	public void createNewUnitOfWork(UnitOfWork unitOfWork) {
+		em.persist(unitOfWork);
+	}
 }

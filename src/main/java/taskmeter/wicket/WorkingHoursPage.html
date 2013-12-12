@@ -19,15 +19,28 @@
 						<tr>
 							<th width="20%">Mettől</th>
 							<th width="20%">Meddig</th>
-							<th width="60%">Megjegyzés</th>
+							<th width="60%" colspan="2">Megjegyzés</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr wicket:id="units">
 							<td wicket:id="fromDate"></td>
 							<td wicket:id="toDate"></td>
-							<td wicket:id="description"></td>
+							<td wicket:id="description" colspan="2"></td>
 						</tr>
+						<form wicket:id="form">
+						<tr>
+							<td><input class="form-control" type="text"
+								wicket:id="fromDate" /></td>
+							<td><input class="form-control" type="text"
+								wicket:id="toDate"></td>
+							<td><input class="form-control" type="text"
+								wicket:id="description"></td>
+							<td><button type="submit" class="btn btn-default">
+									<span class="glyphicon glyphicon-edit"></span> Ment
+								</button></td>
+						</tr>
+						</form>
 					</tbody>
 				</table>
 			</div>
