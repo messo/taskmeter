@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+
+eclipse {
+	jdt {
+		sourceCompatibility = 1.7
+    	targetCompatibility = 1.7
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.apache.wicket:wicket:6.12.0'
+	compile 'org.apache.wicket:wicket-cdi:6.12.0'
+	compile 'org.apache.wicket:wicket-auth-roles:6.12.0'
+	compile 'org.jboss.seam.conversation:seam-conversation-weld:3.0.0.Final'
+	providedCompile 'javax:javaee-api:6.0'
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/resources'
+            srcDir 'src/main/java'
+        }
+    }
+}

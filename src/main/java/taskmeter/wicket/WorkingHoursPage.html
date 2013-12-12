@@ -1,0 +1,38 @@
+<wicket:extend>
+
+	<div class="container" style="margin-top: 30px;">
+		<div class="page-header">
+			<h1>Munkaidő nyilvántartás</h1>
+		</div>
+		<p class="lead">Ezen a felületen lehet megtekinteni, hogy melyik
+			projekteken, mely időtartományokban történt tevékenység.</p>
+
+		<div class="panel panel-default" wicket:id="projects">
+			<div class="panel-heading">
+				Projekt: <span style="font-weight: bold;" wicket:id="project" />
+			</div>
+			<div class="panel-body">
+
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th width="20%">Mettől</th>
+							<th width="20%">Meddig</th>
+							<th width="60%">Megjegyzés</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr wicket:id="units">
+							<td wicket:id="fromDate"></td>
+							<td wicket:id="toDate"></td>
+							<td wicket:id="description"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+</wicket:extend>

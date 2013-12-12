@@ -1,0 +1,162 @@
+<wicket:extend>
+
+	<!-- Begin page content -->
+	<div class="container" style="margin-top: 30px;">
+		<div class="page-header">
+			<h1>Adminisztrátori felület</h1>
+		</div>
+		<p class="lead">Ezen a felületen lehet adminisztrálni a
+			rendszerben lévő entitásokat.</p>
+
+		<div wicket:id="fp"></div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Felhasználók kezelése</div>
+			<div class="panel-body">
+
+				<form wicket:id="editUserForm">
+					<div class="col-lg-8">
+						<div class="input-group">
+							<select wicket:id="users" class="form-control"></select>
+							<div class="input-group-btn">
+								<button wicket:id="editUser" type="submit"
+									class="btn btn-default">
+									<span class="glyphicon glyphicon-check"></span> Kiválaszt
+								</button>
+								<button wicket:id="addUser" type="submit"
+									class="btn btn-default">
+									<span class="glyphicon glyphicon-plus"></span> Új felvétele
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+
+				<div wicket:id="userDatas">
+					<div class="panel panel-default" style="margin-top: 50px;">
+						<div class="panel-heading">Adatok kitöltése</div>
+						<div class="panel-body">
+							<form wicket:id="userForm" class="form-horizontal" role="form">
+								<div class="form-group">
+									<label for="inputLastname" class="col-sm-2 control-label">Vezetéknév</label>
+									<div class="col-sm-10">
+										<input wicket:id="lastName" type="text" class="form-control"
+											id="inputLastname" placeholder="Vezetéknév">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputFirstname" class="col-sm-2 control-label">Keresztnév</label>
+									<div class="col-sm-10">
+										<input wicket:id="firstName" type="text" class="form-control"
+											id="inputFirstname" placeholder="Vezetéknév">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+									<div class="col-sm-10">
+										<input wicket:id="email" type="email" class="form-control"
+											id="inputEmail3" placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword" class="col-sm-2 control-label">Jelszó</label>
+									<div class="col-sm-10">
+										<input wicket:id="password" type="password"
+											class="form-control" id="inputPassword" placeholder="Jelszó">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button wicket:id="saveUser" type="submit"
+											class="btn btn-default">Ment / Hozzáad</button>
+
+										<button wicket:id="delUser" type="submit"
+											class="btn btn-default">Töröl</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">Szerepkörök</div>
+						<div class="panel-body">
+							<form wicket:id="rolesForm" class="form-horizontal" role="form">
+								<div wicket:id="roles" class="checkbox">
+									<label> <input wicket:id="checkbox" type="checkbox" />
+										<span wicket:id="name" />
+									</label>
+								</div>
+
+								<div class="form-group" style="margin-top: 15px;">
+									<div class="col-sm-10">
+										<button wicket:id="saveRoles" type="submit"
+											class="btn btn-default">Frissít</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Projektek kezelése</div>
+			<div class="panel-body">
+
+				<form wicket:id="projectsForm">
+					<table class="table">
+						<thead>
+							<tr>
+								<th width="40%">Név</th>
+								<th width="40%">Projektvezető</th>
+								<th width="20%">Művelet</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr wicket:id="projects">
+								<td><input wicket:id="name" type="text"
+									class="form-control"></td>
+								<td><select wicket:id="leader" class="form-control"><option>a</option>
+										<option>a</option></select></td>
+								<td>
+									<button wicket:id="save" type="submit" class="btn btn-default">
+										<span class="glyphicon glyphicon-edit"></span> Ment
+									</button>
+									<button wicket:id="delete" type="submit"
+										class="btn btn-default">
+										<span class="glyphicon glyphicon-remove"></span> Töröl
+									</button>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</form>
+
+				<form wicket:id="newProjectForm">
+					<table class="table" style="margin-top: -20px;">
+						<tbody>
+							<tr>
+								<td width="40%"><input wicket:id="newProject" type="text"
+									class="form-control"></td>
+								<td width="40%"><select wicket:id="newLeader"
+									class="form-control" /></td>
+								<td width="20%">
+									<button wicket:id="add" type="submit" class="btn btn-default">
+										<span class="glyphicon glyphicon-plus"></span> Felvesz
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+</wicket:extend>
